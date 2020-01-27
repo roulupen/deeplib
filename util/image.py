@@ -1,6 +1,4 @@
-import cv2
-import tensorflow as tf
-import numpy as np
+from ..imports import *
 
 
 def replace_slice(input_: tf.Tensor, replacement, begin) -> tf.Tensor:
