@@ -1,11 +1,7 @@
 from ..imports import *
 from ..util import  colab as util_colab
 from ..util import image as util_image
-#from .. import util_colab
-#from .. import util_image
-#import util.image as util_image
-#import util.colab as util_colab
-#import data.data_augmentation as data_aug
+from .data_augmentation import *
 
 
 def int64_feature(value) -> tf.train.Feature:
@@ -31,7 +27,7 @@ def input_fn(file_names, batch_size: int, is_train_file=True):
         # Random crop and random flip from left to right in case of training images
         if is_train:
             image = tf.image.random_flip_left_right(tf.random_crop(image, [32, 32, 3]))
-            image = data_aug.cutout(image, 10, 10)
+            image = cutout(image, 10, 10)
 
         return image, label
 
@@ -100,13 +96,13 @@ class DataSet(object):
         if 'cifar10' in data_set_name:
             if not os.path.exists(train_file_path) or not os.path.exists(test_file_path):
                 (train_features, train_labels), (test_features, test_labels) = cifar10.load_data()
-                self.create_data_record(train_file_path, data_aug.normalize(train_features), train_labels, True)
-                self.create_data_record(test_file_path, data_aug.normalize(test_features), test_labels, True)
+                self.create_data_record(train_file_path, normalize(train_features), train_labels, True)
+                self.create_data_record(test_file_path, normalize(test_features), test_labels, True)
         elif 'mnist' in data_set_name:
             if not os.path.exists(train_file_path) or not os.path.exists(test_file_path):
                 (train_features, train_labels), (test_features, test_labels) = mnist.load_data()
-                self.create_data_record(train_file_path, data_aug.normalize(train_features), train_labels, True)
-                self.create_data_record(test_file_path, data_aug.normalize(test_features), test_labels, True)
+                self.create_data_record(train_file_path, normalize(train_features), train_labels, True)
+                self.create_data_record(test_file_path, normalize(test_features), test_labels, True)
         else:
             raise Exception("The data set {} is not supported.".format(data_set_name))
 
