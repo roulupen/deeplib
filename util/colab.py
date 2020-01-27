@@ -1,4 +1,4 @@
-from imports import *
+from ..imports import *
 
 def mount_google_drive(gdrive_path: str = '../content/drive/'):
     """

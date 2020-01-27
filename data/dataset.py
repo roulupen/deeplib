@@ -1,4 +1,4 @@
-from imports import *
+from ..imports import *
 import data
 import util.image as util_image
 import util.colab as util_colab
