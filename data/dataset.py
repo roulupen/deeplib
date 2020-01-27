@@ -42,7 +42,7 @@ def get_tf_record_count(file_name):
     return sum(1 for _ in tf.python_io.tf_record_iterator(file_name))
 
 
-class DataSet(data.DataSet):
+class DataSet(object):
     data_path: str
 
     def __init__(self):
