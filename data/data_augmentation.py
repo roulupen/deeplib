@@ -13,7 +13,7 @@ def cutout(x: tf.Tensor, h: int, w: int, c: int = 3) -> tf.Tensor:
     shape = tf.shape(x)
     x0 = tf.random.uniform([], 0, shape[0] + 1 - h, dtype=tf.int32)
     y0 = tf.random.uniform([], 0, shape[1] + 1 - w, dtype=tf.int32)
-    x = util_img.replace_slice(x, tf.zeros([h, w, c]), [x0, y0, 0])
+    x = util_image.replace_slice(x, tf.zeros([h, w, c]), [x0, y0, 0])
     return x
 
 
