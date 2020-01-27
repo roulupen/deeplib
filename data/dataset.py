@@ -1,15 +1,7 @@
-import os
-import sys
-from random import shuffle
-import glob
-import cv2
-import numpy as np
-import tensorflow as tf
-from google.colab import drive
-from keras.datasets import cifar10, mnist
-
+from imports import *
 import data
 import util.image as util_image
+import util.colab as util_colab
 import data.data_augmentation as data_aug
 
 
@@ -55,7 +47,7 @@ class DataSet(data.DataSet):
     data_path: str
 
     def __init__(self):
-        drive.mount('../content/drive/', force_remount=True)
+        util_colab.mount_google_drive()
         os.listdir('../content/drive/My Drive/datasets/')
         self.data_path = '../content/drive/My Drive/datasets/'
 
