@@ -6,4 +6,4 @@ def mount_google_drive(gdrive_path: str = '../content/drive/'):
     :param gdrive_path: local path to mount Google Drive to.
     :return: None.
     """
-    drive.mount (str, force_remount=True)
+    drive.mount (gdrive_path, force_remount=True)
