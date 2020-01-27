@@ -1,8 +1,4 @@
-import tensorflow as tf
-import numpy as np
-
-import util.image as util_img
-
+from ..imports import *
 
 def cutout(x: tf.Tensor, h: int, w: int, c: int = 3) -> tf.Tensor:
     """
