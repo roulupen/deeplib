@@ -1,5 +1,4 @@
 from ..imports import *
-import data
 import util.image as util_image
 import util.colab as util_colab
 import data.data_augmentation as data_aug
