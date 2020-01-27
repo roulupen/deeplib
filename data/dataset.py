@@ -1,6 +1,6 @@
 from ..imports import *
-import util_colab
-import util_image
+from .. import util_colab
+from .. import util_image
 #import util.image as util_image
 #import util.colab as util_colab
 #import data.data_augmentation as data_aug
