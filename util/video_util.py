@@ -32,7 +32,7 @@ def make_video(outvid, images=None, fps=30, size=None, is_color=True, format="FM
     return vid
 
 
-def make_video_from_directory(images_dir, output_video_dir, video_file_name):
+def make_video_from_image_directory(images_dir, output_video_dir, video_file_name):
     """
         Create a video from a list of images.
 
