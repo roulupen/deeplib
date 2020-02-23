@@ -1,3 +1,6 @@
+import cv2
+
+
 def make_video(outvid, images=None, fps=30, size=None, is_color=True, format="FMP4"):
     """
     Create a video from a list of images.
@@ -57,3 +60,38 @@ def make_video_from_image_directory(images_dir, output_video_dir, video_file_nam
     make_video(output_video_path, images, fps=30)
 
     return output_video_path
+
+
+def hconcat_resize_min(im_list, interpolation=cv2.INTER_CUBIC):
+    """
+    Concatenate frames/images of different sizes horizontally
+    :param im_list: frame/image list
+    :param interpolation: interpolation
+    :return: horizontally concatenated frame
+    """
+    h_min = min(im.shape[0] for im in im_list)
+    im_list_resize = [cv2.resize(im, (int(im.shape[1] * h_min / im.shape[0]), h_min), interpolation=interpolation) for im in im_list]
+    return cv2.hconcat(im_list_resize)
+
+
+def vconcat_resize_min(im_list, interpolation=cv2.INTER_CUBIC):
+    """
+    Concatenate frames/images of different sizes vertically
+    :param im_list: frame/image list
+    :param interpolation: interpolation
+    :return: vertically concatenated frame
+    """
+    w_min = min(im.shape[1] for im in im_list)
+    im_list_resize = [cv2.resize(im, (w_min, int(im.shape[0] * w_min / im.shape[1])), interpolation=interpolation) for im in im_list]
+    return cv2.vconcat(im_list_resize)
+
+
+def concat_tile_resize(im_list_2d, interpolation=cv2.INTER_CUBIC):
+    """
+    Concatenate frames/images in 2d space based on the input 2d array
+    :param im_list_2d: frames/images in a 2d array
+    :param interpolation: interpolation
+    :return: final concatenated image
+    """
+    im_list_v = [hconcat_resize_min(im_list_h, interpolation=cv2.INTER_CUBIC) for im_list_h in im_list_2d]
+    return vconcat_resize_min(im_list_v, interpolation=cv2.INTER_CUBIC)
